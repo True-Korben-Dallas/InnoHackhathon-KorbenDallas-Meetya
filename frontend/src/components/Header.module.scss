@@ -1,0 +1,18 @@
+.header {
+    background-color: #ffffff !important; 
+    .navbar-nav .nav-link {
+        color: #000000 !important;
+        &:hover {
+            color: #0056b3 !important; 
+        }
+    }
+
+    .username {
+        margin-left: 10px;
+    }
+
+    .dropdown-toggle {
+        display: flex;
+        align-items: center;
+    }
+}

@@ -1,0 +1,14 @@
+.home {
+    .container {
+        padding-top: 2rem;
+    }
+
+    .eventCard {
+        max-width: 50%;
+    }
+
+    .cardImage {
+        max-height: 150px;
+        object-fit: cover;
+    }
+}
