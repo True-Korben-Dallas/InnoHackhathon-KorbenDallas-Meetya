@@ -14,12 +14,12 @@ const Header = ({ user }) => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="/create-event">Create Event</Nav.Link>
-                        <Nav.Link href="/groups">Users Group</Nav.Link>
+                        <Nav.Link href="#/create-event">Create Event</Nav.Link>
+                        <Nav.Link href="#/groups">Users Group</Nav.Link>
                     </Nav>
                     <Nav>
                         <NavDropdown title={<><PersonFill size={30} /><span className={styles.username}>{username}</span></>} id="basic-nav-dropdown">
-                            <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+                            <NavDropdown.Item href="#/profile">Profile</NavDropdown.Item>
                             <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>

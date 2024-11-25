@@ -13,7 +13,7 @@ function App() {
         <Router>
             <div className="App">
                 <Routes>
-                    <Route exact path="/" element={<Home />} />
+                    <Route path="/" element={<Home />} />
                     <Route path="/create-event" element={<CreateEvent />} />
                     <Route path="/event/:id" element={<EventDetail />} />
                     <Route path="/profile" element={<Profile />} />
