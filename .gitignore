@@ -1,0 +1,12 @@
+# Global ignores
+node_modules/
+.env
+
+# Frontend-specific ignores
+frontend/build/
+frontend/node_modules/
+frontend/.env
+
+# Backend-specific ignores
+backend/vendor/
+backend/.env
