@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import styles from './EventForm.module.scss';
 import { tagsList } from '../constants/tags';
+import styles from './EventForm.module.scss';
+
 
 const EventForm = () => {
   const [title, setTitle] = useState('');
@@ -49,21 +50,23 @@ const EventForm = () => {
         <Col md={4}>
           <Form.Group className="mb-3" controlId="tags">
             <Form.Label>Tags</Form.Label>
-            {tagsList.map(tag => (
-              <div key={tag} className={styles.formCheck}>
-                <input
-                  className={styles.formCheckInput}
-                  type="checkbox"
-                  id={tag}
-                  name={tag}
-                  checked={tags[tag]}
-                  onChange={handleTagChange}
-                />
-                <label className={styles.formCheckLabel} htmlFor={tag}>
-                  {tag}
-                </label>
-              </div>
-            ))}
+            <div className={styles.tagsContainer}>
+              {tagsList.map(tag => (
+                <div key={tag} className={styles.formCheck}>
+                  <input
+                    className={styles.formCheckInput}
+                    type="checkbox"
+                    id={tag}
+                    name={tag}
+                    checked={tags[tag]}
+                    onChange={handleTagChange}
+                  />
+                  <label className={styles.formCheckLabel} htmlFor={tag}>
+                    {tag}
+                  </label>
+                </div>
+              ))}
+            </div>
           </Form.Group>
         </Col>
       </Row>
