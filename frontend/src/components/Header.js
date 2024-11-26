@@ -4,7 +4,7 @@ import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { PersonFill } from 'react-bootstrap-icons';
 import styles from './Header.module.scss';
 
-const Header = ({ user, isAuthenticated }) => {
+const Header = ({ user }) => {
     const username = user?.name || 'Guest';
 
     return (
@@ -18,14 +18,10 @@ const Header = ({ user, isAuthenticated }) => {
                         <Nav.Link href="#/groups">Users Group</Nav.Link>
                     </Nav>
                     <Nav>
-                        {isAuthenticated ? (
-                            <NavDropdown title={<><PersonFill size={30} /><span className={styles.username}>{username}</span></>} id="basic-nav-dropdown">
-                                <NavDropdown.Item href="#/profile">Profile</NavDropdown.Item>
-                                <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
-                            </NavDropdown>
-                        ) : (
-                            <Nav.Link href="#/login">Login</Nav.Link>
-                        )}
+                        <NavDropdown title={<><PersonFill size={30} /><span className={styles.username}>{username}</span></>} id="basic-nav-dropdown">
+                            <NavDropdown.Item href="#/profile">Profile</NavDropdown.Item>
+                            <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
+                        </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

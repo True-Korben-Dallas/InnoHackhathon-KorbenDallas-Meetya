@@ -1,32 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import CreateEvent from './pages/CreateEvent';
-import Groups from './pages/Groups';
+import EventDetail from './pages/EventDetail';
 import Profile from './pages/Profile';
-import Login from './pages/Login';
-import Header from './components/Header';
+import Groups from './pages/Groups';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.module.scss';
 
-const App = () => {
-    const [user, setUser] = useState(null);
-
-    const handleLogin = (userData) => {
-        setUser(userData);
-    };
-
+function App() {
     return (
         <Router>
-            <Header user={user} isAuthenticated={!!user} />
-            <Routes>
-                <Route path="/" element={<Home user={user} />} />
-                <Route path="/create-event" element={<CreateEvent />} />
-                <Route path="/groups" element={<Groups />} />
-                <Route path="/profile" element={<Profile user={user} />} />
-                <Route path="/login" element={<Login onLogin={handleLogin} />} />
-            </Routes>
+            <div className="App">
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/create-event" element={<CreateEvent />} />
+                    <Route path="/event/:id" element={<EventDetail />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/groups" element={<Groups />} />
+                </Routes>
+            </div>
         </Router>
     );
-};
+}
 
 export default App;
