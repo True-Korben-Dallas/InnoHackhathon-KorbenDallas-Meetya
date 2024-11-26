@@ -4,4 +4,27 @@
         max-width: 100%;
         height: auto;
     }
+
+    .tagsContainer {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .formCheck {
+        margin-bottom: 0.5rem;
+        width: 48%;
+        margin-right: 2%;
+    }
+
+    .formCheck:nth-child(2n) {
+        margin-right: 0;
+    }
+
+    .formCheckInput {
+        margin-right: 0.5rem;
+    }
+
+    .formCheckLabel {
+        cursor: pointer;
+    }
 }

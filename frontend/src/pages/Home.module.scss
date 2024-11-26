@@ -1,14 +1,43 @@
-.home {
-    .container {
-        padding-top: 2rem;
+.filterPanel {
+    .form-check-inline {
+        margin-bottom: 0.5rem;
     }
+}
 
-    .eventCard {
-        max-width: 50%;
-    }
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
 
-    .cardImage {
-        max-height: 150px;
-        object-fit: cover;
-    }
+.buttonGroup {
+    display: flex;
+    gap: 1rem;
+}
+
+.filterPanelContainer {
+    margin-bottom: 1rem;
+}
+
+.filterTags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.existingEventsHeader {
+    margin-bottom: 1rem;
+}
+
+.formCheck {
+    margin-bottom: 0.5rem;
+}
+
+.formCheckInput {
+    margin-right: 0.5rem;
+}
+
+.formCheckLabel {
+    cursor: pointer;
 }
