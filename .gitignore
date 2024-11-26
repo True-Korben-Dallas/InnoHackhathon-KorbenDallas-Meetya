@@ -10,3 +10,7 @@ frontend/.env
 # Backend-specific ignores
 backend/vendor/
 backend/.env
+venv/
+
+backend/events/migrations
+db.sqlite3
