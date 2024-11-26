@@ -10,6 +10,14 @@ const Profile = () => {
         email: 'user@example.com',
         eventsCreated: 5,
         eventsJoined: 10,
+        createdEvents: [
+            { id: 1, title: 'Created Event 1', date: '2024-11-25' },
+            { id: 2, title: 'Created Event 2', date: '2024-12-01' },
+        ],
+        joinedEvents: [
+            { id: 3, title: 'Joined Event 1', date: '2024-12-15' },
+            { id: 4, title: 'Joined Event 2', date: '2025-01-10' },
+        ]
     });
 
     const [editModalShow, setEditModalShow] = useState(false);
@@ -37,6 +45,26 @@ const Profile = () => {
                                 <h4>Profile Details</h4>
                                 <p><strong>Events Created:</strong> {user.eventsCreated}</p>
                                 <p><strong>Events Joined:</strong> {user.eventsJoined}</p>
+                                <h5 className="mt-4">Created Events</h5>
+                                {user.createdEvents.length > 0 ? (
+                                    <ul>
+                                        {user.createdEvents.map(event => (
+                                            <li key={event.id}>{event.title} - {event.date}</li>
+                                        ))}
+                                    </ul>
+                                ) : (
+                                    <p>No events created yet.</p>
+                                )}
+                                <h5 className="mt-4">Joined Events</h5>
+                                {user.joinedEvents.length > 0 ? (
+                                    <ul>
+                                        {user.joinedEvents.map(event => (
+                                            <li key={event.id}>{event.title} - {event.date}</li>
+                                        ))}
+                                    </ul>
+                                ) : (
+                                    <p>No events joined yet.</p>
+                                )}
                             </Card.Body>
                         </Card>
                     </Col>
