@@ -1,8 +1,10 @@
 import random
-from faker import Faker
-from django.core.management.base import BaseCommand
-from events.models import User, Group, Tag, Event, EventTag
+
 from django.contrib.auth.hashers import make_password
+from django.core.management.base import BaseCommand
+from faker import Faker
+
+from events.models import Event, EventTag, Group, Tag, User
 
 fake = Faker()
 

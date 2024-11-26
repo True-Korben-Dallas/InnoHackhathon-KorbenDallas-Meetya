@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from ...models import User, Event, Group, Tag, EventTag, EventSubscription, UserGroup
+
+from .models import (Event, EventSubscription, EventTag, Group, Tag, User,
+                     UserGroup)
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -13,7 +15,8 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event
-        fields = ['id', 'title', 'description', 'date', 'location', 'creator', 'image']
+        fields = ['id', 'title', 'description',
+                  'date', 'location', 'creator', 'image']
 
 
 class GroupSerializer(serializers.ModelSerializer):
