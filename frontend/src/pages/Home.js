@@ -52,7 +52,7 @@ const Home = ({ user }) => {
         <div>
             <Header user={user} />
             <Container className="mt-4">
-                <h2 className="mb-4">Welcome to the Event Management System</h2>
+                <h2 className="mb-4">Welcome to the <b>MeetYa!</b></h2>
                 <p className="mb-5">Here you can create, manage, and join events. Use the navigation above to get started.</p>
                 <Form>
                     <Form.Group className="mb-3" controlId="search">
