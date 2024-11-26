@@ -1,10 +1,9 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from .models import (Event, EventSubscription, EventTag, Group, Tag,
-                     UserGroup)
-
+from .models import Event, EventSubscription, Group, UserGroup
 
 User = get_user_model()
+
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
@@ -15,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = User(**validated_data)
-        user.set_password(validated_data['password'])  # Хэшируем пароль
+        user.set_password(validated_data['password']) 
         user.save()
         return user
 
@@ -28,27 +27,26 @@ class GroupSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'description', 'members']
 
 
-class TagSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tag
-        fields = ['id', 'name']
-
-
-class EventTagSerializer(serializers.ModelSerializer):
-    tag = TagSerializer()
-    class Meta:
-        model = EventTag
-        fields = ['event', 'tag']
-
-
 class EventSerializer(serializers.ModelSerializer):
     creator = UserSerializer(read_only=True)
-    tags = EventTagSerializer(many=True, read_only=True, source='eventtag_set')
+    tags = serializers.CharField(required=False, allow_blank=True) 
+
     class Meta:
         model = Event
-        fields = ['id', 'title', 'tags', 'description',
-                  'date', 'location', 'creator', 'image']
+        fields = ['id', 'title', 'tags', 'description', 'date', 'location', 'creator', 'image']
 
+    def validate_tags(self, value):
+        """Преобразуем теги в список строк"""
+        if value:
+            return value.split(",")  
+        return []  
+
+    def to_representation(self, instance):
+        """Преобразуем теги обратно в строку для отображения"""
+        representation = super().to_representation(instance)
+        if isinstance(representation['tags'], list):
+            representation['tags'] = ', '.join(representation['tags'])  
+        return representation
 
 
 class EventSubscriptionSerializer(serializers.ModelSerializer):

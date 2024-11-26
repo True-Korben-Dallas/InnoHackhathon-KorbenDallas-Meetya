@@ -11,5 +11,9 @@ frontend/.env
 backend/vendor/
 backend/.env
 venv/
-backend/events/migrations
+
+**/migrations/
+
+
+*.py[cod]
 db.sqlite3

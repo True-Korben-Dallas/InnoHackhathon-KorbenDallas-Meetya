@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import Header from '../components/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Card, Button, Form, Collapse, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -64,7 +63,6 @@ const Home = ({ user }) => {
 
     return (
         <div>
-            <Header user={user} />
             <Container className="mt-4">
                 <div className={styles.headerContainer}>
                     <div>

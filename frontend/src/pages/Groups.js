@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Header from '../components/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Card, Button, Form, Modal } from 'react-bootstrap';
 import { tagStyles, tagsList } from '../constants/tags';
@@ -72,7 +71,6 @@ const Groups = () => {
 
   return (
     <div>
-      <Header />
       <Container className={`mt-4 ${styles.groupsContainer}`}>
         <div className={styles.headerContainer}>
           <h2>Users Group</h2>

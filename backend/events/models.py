@@ -11,8 +11,7 @@ class User(AbstractUser):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=150)
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'first_name',
-                       'last_name', 'password']
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'password']
     groups = models.ManyToManyField(
         'auth.Group',
         related_name='custom_user_set',
@@ -37,6 +36,7 @@ class Event(models.Model):
                                 on_delete=models.CASCADE,
                                 related_name='events')
     image = models.ImageField(upload_to='event_images/', blank=True, null=True)
+    tags = models.CharField(max_length=500, blank=True, null=True)  # Строка для тегов
 
     def __str__(self):
         return self.title
@@ -49,21 +49,6 @@ class Group(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class Tag(models.Model):
-    name = models.CharField(max_length=50, unique=True)
-
-    def __str__(self):
-        return self.name
-
-
-class EventTag(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
-
-    class Meta:
-        unique_together = ('event', 'tag')
 
 
 class EventSubscription(models.Model):

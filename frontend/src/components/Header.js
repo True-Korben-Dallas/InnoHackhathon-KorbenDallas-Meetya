@@ -4,8 +4,13 @@ import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { PersonFill } from 'react-bootstrap-icons';
 import styles from './Header.module.scss';
 
-const Header = ({ user }) => {
-    const username = user?.name || 'Guest';
+const Header = ({ user, setUser }) => {
+    const username = user?.username || 'Guest';
+
+    const handleLogout = () => {
+        localStorage.removeItem('access_token'); 
+        setUser(null); 
+    };
 
     return (
         <Navbar bg="white" expand="lg" className={styles.header}>
@@ -18,10 +23,17 @@ const Header = ({ user }) => {
                         <Nav.Link href="#/groups">Users Group</Nav.Link>
                     </Nav>
                     <Nav>
-                        <NavDropdown title={<><PersonFill size={30} /><span className={styles.username}>{username}</span></>} id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#/profile">Profile</NavDropdown.Item>
-                            <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
-                        </NavDropdown>
+                        {!user ? (
+                            <>
+                                <Nav.Link href="#/login">Login</Nav.Link>
+                                <Nav.Link href="#/register">Register</Nav.Link>
+                            </>
+                        ) : (
+                            <NavDropdown title={<><PersonFill size={30} /><span className={styles.username}>{username}</span></>} id="basic-nav-dropdown">
+                                <NavDropdown.Item href="#/profile">Profile</NavDropdown.Item>
+                                <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                            </NavDropdown>
+                        )}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

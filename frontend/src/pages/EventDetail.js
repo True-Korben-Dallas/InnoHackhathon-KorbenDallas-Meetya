@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Card, Button, Modal, Form } from 'react-bootstrap';
-import Header from '../components/Header';
 import sampleImage from '../assets/sample-image.jpg';
 import { tagStyles, tagsList } from '../constants/tags';
 import styles from './EventDetail.module.scss';
@@ -36,7 +35,6 @@ const EventDetail = () => {
 
   return (
     <div>
-      <Header />
       <Container className={`mt-4 ${styles.eventDetail}`}>
         {event ? (
           <Card>

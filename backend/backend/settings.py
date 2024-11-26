@@ -1,3 +1,4 @@
+from datetime import timedelta
 from pathlib import Path
 from decouple import config
 
@@ -10,6 +11,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = BASE_DIR / 'media' 
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
@@ -30,6 +34,13 @@ CORS_ALLOW_METHODS = [
     "OPTIONS",
 ]
 
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': False,
+    'UPDATE_LAST_LOGIN': False,
+}
 
 INSTALLED_APPS = [
     'drf_yasg',

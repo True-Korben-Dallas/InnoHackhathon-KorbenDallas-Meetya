@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Header from '../components/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Card, Button, Form, Modal } from 'react-bootstrap';
 import userProfileImage from '../assets/sample-image.jpg';
@@ -30,7 +29,6 @@ const Profile = () => {
 
     return (
         <div>
-            <Header />
             <Container className="mt-4">
                 <Row>
                     <Col md={4} className="text-center">
