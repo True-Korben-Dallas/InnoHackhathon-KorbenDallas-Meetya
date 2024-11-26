@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/InnoHackhathon-KorbenDallas-Meetya/static/css/main.7b9cbbcb.css",
-    "main.js": "/InnoHackhathon-KorbenDallas-Meetya/static/js/main.97ef55cd.js",
+    "main.css": "/InnoHackhathon-KorbenDallas-Meetya/static/css/main.e8d09544.css",
+    "main.js": "/InnoHackhathon-KorbenDallas-Meetya/static/js/main.e6db9735.js",
     "index.html": "/InnoHackhathon-KorbenDallas-Meetya/index.html",
-    "main.7b9cbbcb.css.map": "/InnoHackhathon-KorbenDallas-Meetya/static/css/main.7b9cbbcb.css.map",
-    "main.97ef55cd.js.map": "/InnoHackhathon-KorbenDallas-Meetya/static/js/main.97ef55cd.js.map"
+    "main.e8d09544.css.map": "/InnoHackhathon-KorbenDallas-Meetya/static/css/main.e8d09544.css.map",
+    "main.e6db9735.js.map": "/InnoHackhathon-KorbenDallas-Meetya/static/js/main.e6db9735.js.map"
   },
   "entrypoints": [
-    "static/css/main.7b9cbbcb.css",
-    "static/js/main.97ef55cd.js"
+    "static/css/main.e8d09544.css",
+    "static/js/main.e6db9735.js"
   ]
 }
