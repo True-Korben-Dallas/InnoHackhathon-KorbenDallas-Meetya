@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import styles from './RegisterForm.module.scss';
 
-const RegisterForm = () => {
+const RegisterForm = ({ onRegister }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState(''); 
@@ -13,7 +13,6 @@ const RegisterForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-
             const response = await axios.post('http://127.0.0.1:8000/register/', {
                 username,  
                 email,
@@ -21,69 +20,69 @@ const RegisterForm = () => {
                 first_name: firstName,
                 last_name: lastName,
             });
-            localStorage.setItem('access_token', response.data.access);
-            window.location.href = '/'; 
+            onRegister(response.data.user, response.data.access);
+            window.location.href = '/';
         } catch (err) {
             setError('Error during registration');
         }
     };
 
     return (
-        <div className="container">
-            <h2>Register</h2>
-            <form onSubmit={handleSubmit} className={styles['register-form']}>
-                <div className="form-group">
+        <div className={styles.container}>
+            <form onSubmit={handleSubmit} className={styles.registerForm}>
+                <h2 className={styles.title}>Register</h2>
+                <div className={styles.formGroup}>
                     <label>Username</label>
                     <input
                         type="text"
-                        className={`form-control ${styles.input}`}
+                        className={styles.input}
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div className={styles.formGroup}>
                     <label>First Name</label>
                     <input
                         type="text"
-                        className={`form-control ${styles.input}`}
+                        className={styles.input}
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div className={styles.formGroup}>
                     <label>Last Name</label>
                     <input
                         type="text"
-                        className={`form-control ${styles.input}`}
+                        className={styles.input}
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div className={styles.formGroup}>
                     <label>Email</label>
                     <input
                         type="email"
-                        className={`form-control ${styles.input}`}
+                        className={styles.input}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div className={styles.formGroup}>
                     <label>Password</label>
                     <input
                         type="password"
-                        className={`form-control ${styles.input}`}
+                        className={styles.input}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
                 </div>
-                {error && <div className="alert alert-danger">{error}</div>}
-                <button type="submit" className={`btn btn-primary ${styles.button}`}>Register</button>
+                {error && <div className={styles.alert}>{error}</div>}
+                <button type="submit" className={styles.button}>Register</button>
             </form>
         </div>
     );

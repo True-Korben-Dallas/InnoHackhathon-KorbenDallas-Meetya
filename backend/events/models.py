@@ -1,7 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-
 class User(AbstractUser):
     email = models.EmailField(
         verbose_name='email address',
@@ -36,7 +35,7 @@ class Event(models.Model):
                                 on_delete=models.CASCADE,
                                 related_name='events')
     image = models.ImageField(upload_to='event_images/', blank=True, null=True)
-    tags = models.CharField(max_length=500, blank=True, null=True)  # Строка для тегов
+    tags = models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return self.title

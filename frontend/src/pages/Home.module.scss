@@ -41,3 +41,60 @@
 .formCheckLabel {
     cursor: pointer;
 }
+
+.eventCard {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    img {
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .cardBody {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-grow: 1;
+    }
+
+    .cardTitle {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+        height: 3rem;
+    }
+
+    .cardDescription {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 0.5rem;
+        line-height: 1.5;
+        max-height: 4.5em;
+        height: 4.5em;
+    }
+
+    .cardText {
+        margin-bottom: 0.5rem;
+        height: 2rem;
+    }
+
+    .cardTags {
+        margin-bottom: 0.5rem;
+        height: 2rem;
+    }
+
+    .cardButtons {
+        margin-top: auto;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+
+        button {
+            width: auto;
+        }
+    }
+}

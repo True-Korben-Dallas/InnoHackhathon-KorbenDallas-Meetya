@@ -19,7 +19,7 @@ const Header = ({ user, setUser }) => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="#/create-event">Create Event</Nav.Link>
+                        {user && <Nav.Link href="#/create-event">Create Event</Nav.Link>}
                         <Nav.Link href="#/groups">Users Group</Nav.Link>
                     </Nav>
                     <Nav>

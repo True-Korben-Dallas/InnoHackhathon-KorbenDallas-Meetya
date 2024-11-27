@@ -4,7 +4,6 @@ from .models import Event, EventSubscription, Group, UserGroup
 
 User = get_user_model()
 
-
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 
@@ -14,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = User(**validated_data)
-        user.set_password(validated_data['password']) 
+        user.set_password(validated_data['password'])
         user.save()
         return user
 
@@ -29,23 +28,29 @@ class GroupSerializer(serializers.ModelSerializer):
 
 class EventSerializer(serializers.ModelSerializer):
     creator = UserSerializer(read_only=True)
-    tags = serializers.CharField(required=False, allow_blank=True) 
+    tags = serializers.ListField(
+        child=serializers.CharField(max_length=200),
+        source='tags_as_list',
+        required=False
+    )
 
     class Meta:
         model = Event
         fields = ['id', 'title', 'tags', 'description', 'date', 'location', 'creator', 'image']
 
-    def validate_tags(self, value):
-        """Преобразуем теги в список строк"""
-        if value:
-            return value.split(",")  
-        return []  
+    def create(self, validated_data):
+        tags = validated_data.pop('tags_as_list', [])
+        validated_data['tags'] = ','.join(tags)
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        tags = validated_data.pop('tags_as_list', [])
+        instance.tags = ','.join(tags)
+        return super().update(instance, validated_data)
 
     def to_representation(self, instance):
-        """Преобразуем теги обратно в строку для отображения"""
         representation = super().to_representation(instance)
-        if isinstance(representation['tags'], list):
-            representation['tags'] = ', '.join(representation['tags'])  
+        representation['tags'] = instance.tags.split(',') if instance.tags else []
         return representation
 
 

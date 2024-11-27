@@ -12,38 +12,34 @@ const Home = ({ user }) => {
     const [search, setSearch] = useState('');
     const [selectedTags, setSelectedTags] = useState({});
     const [openFilters, setOpenFilters] = useState(false);
-    const [userGroups, setUserGroups] = useState([]); 
     const navigate = useNavigate();
 
     useEffect(() => {
-        const groups = ['Group 1', 'Group 2'];
-        setUserGroups(groups);
-
-        const sampleEvents = [
-            { id: 1, title: 'Sample Event 1', date: '2024-11-25', description: 'This is a sample event description.', imageUrl: '', tags: { tag1: true, tag2: false, tag3: true }, group: 'Group 1' },
-            { id: 2, title: 'Sample Event 2', date: '2024-12-01', description: 'This is another sample event description.', imageUrl: '', tags: { tag1: false, tag2: true, tag3: false }, group: 'Group 2' },
-            { id: 3, title: 'Sample Event 3', date: '2024-12-15', description: 'This is a third sample event description.', imageUrl: '', tags: { tag1: true, tag2: true, tag3: false }, group: 'Group 3' },
-            { id: 4, title: 'Sample Event 4', date: '2025-01-10', description: 'This is a fourth sample event description.', imageUrl: '', tags: { tag1: false, tag2: false, tag3: true }, group: 'Group 1' },
-        ];
-        setEvents(sampleEvents);
-        setFilteredEvents(sampleEvents.filter(event => groups.includes(event.group)));
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/events/');
+                const data = await response.json();
+                setEvents(data);
+                setFilteredEvents(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
     }, []);
 
     const filterEvents = useCallback(() => {
         const filtered = events.filter(event => {
             const matchesSearch = event.title.toLowerCase().includes(search.toLowerCase());
-            const matchesTags = Object.entries(selectedTags).every(([key, value]) => {
-                return !value || event.tags[key];
-            });
-            const matchesGroup = userGroups.includes(event.group);
-            return matchesSearch && matchesTags && matchesGroup;
+            const matchesTags = Object.entries(selectedTags).every(([key, value]) => !value || (event.tags && event.tags[key]));
+            return matchesSearch && matchesTags;
         });
         setFilteredEvents(filtered);
-    }, [events, search, selectedTags, userGroups]);
+    }, [events, search, selectedTags]);
 
     useEffect(() => {
         filterEvents();
-    }, [search, selectedTags, userGroups, filterEvents]);
+    }, [search, selectedTags, filterEvents]);
 
     const handleTagChange = (e) => {
         setSelectedTags({ ...selectedTags, [e.target.name]: e.target.checked });
@@ -78,13 +74,15 @@ const Home = ({ user }) => {
                         >
                             {openFilters ? 'Hide Filters' : 'Show Filters'}
                         </Button>
-                        <Button
-                            variant="primary"
-                            onClick={navigateToCreateEvent}
-                            className={styles.createEventButton}
-                        >
-                            Create Event
-                        </Button>
+                        {user && (
+                            <Button
+                                variant="primary"
+                                onClick={navigateToCreateEvent}
+                                className={styles.createEventButton}
+                            >
+                                Create Event
+                            </Button>
+                        )}
                     </div>
                 </div>
                 <Collapse in={openFilters}>
@@ -127,17 +125,21 @@ const Home = ({ user }) => {
                         {filteredEvents.map(event => (
                             <Col key={event.id} md={4} className="mb-4">
                                 <Card className={styles.eventCard}>
-                                    <Card.Img variant="top" src={event.imageUrl || sampleImage} />
-                                    <Card.Body>
-                                        <Card.Title>{event.title}</Card.Title>
-                                        <Card.Text>Date: {event.date}</Card.Text>
-                                        <Card.Text>{event.description}</Card.Text>
-                                        <Card.Text>
+                                    <Card.Img variant="top" src={event.image || sampleImage} />
+                                    <Card.Body className={styles.cardBody}>
+                                        <Card.Title className={styles.cardTitle}>{event.title}</Card.Title>
+                                        <Card.Text className={styles.cardText}>Date: {new Date(event.date).toLocaleDateString()}</Card.Text>
+                                        <Card.Text className={styles.cardDescription}>{event.description}</Card.Text>
+                                        <Card.Text className={styles.cardText}>Location: {event.location}</Card.Text>
+                                        <Card.Text className={styles.cardText}>Creator: {event.creator.first_name} {event.creator.last_name}</Card.Text>
+                                        <Card.Text className={styles.cardTags}>
                                             Tags: {event.tags ? Object.entries(event.tags).filter(([key, value]) => value).map(([key]) => (
                                                 <span key={key} className={`badge ${tagStyles[key]}`}>{key}</span>
                                             )) : 'No tags'}
                                         </Card.Text>
-                                        <Button variant="primary" onClick={() => handleView(event)}>View</Button>
+                                        <div className={styles.cardButtons}>
+                                            <Button variant="primary" onClick={() => handleView(event)}>View</Button>
+                                        </div>
                                     </Card.Body>
                                 </Card>
                             </Col>

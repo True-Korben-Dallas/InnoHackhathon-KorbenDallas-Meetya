@@ -26,20 +26,30 @@ function App() {
             .then(data => setUser(data))  
             .catch(error => console.error('Error fetching user:', error));
         }
-    }, [localStorage.getItem('access_token')]);
+    }, []);
+
+    const handleLogin = (userData, token) => {
+        localStorage.setItem('access_token', token);
+        setUser(userData);
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem('access_token');
+        setUser(null);
+    };
 
     return (
         <Router>
             <div className="App">
-                <Header user={user} setUser={setUser} />
+                <Header user={user} setUser={setUser} onLogout={handleLogout} />
                 <Routes>
                     <Route path="/" element={<Home user={user} />} />
                     <Route path="/create-event" element={<CreateEvent />} />
                     <Route path="/event/:id" element={<EventDetail />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/groups" element={<Groups />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<Login onLogin={handleLogin} />} />
+                    <Route path="/register" element={<Register onRegister={handleLogin} />} />
                 </Routes>
             </div>
         </Router>
